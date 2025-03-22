@@ -3,11 +3,15 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --btn-background-hover: #222;
+  --btn-color-hover: #fff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-main: #024950;
+  --color-secondary: yellow;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -16,6 +20,8 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    /* --btn-background-hover: #333;
+    --btn-color-hover: #fff; */
   }
 }
 
@@ -23,4 +29,34 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+}
+a {
+  display: flex;
+  cursor: pointer;
+}
+.btn {
+  display: block;
+  width: fit-content;
+  padding: 10px 18px;
+  font-size: 22px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: var(--color-main);
+  color: var(--foreground);
+  transition: 0.3s;
+  &:hover {
+    background-color: #08363a;
+    color: var(--btn-color-hover);
+  }
+}
+.data {
+  background-color: var(--color-main);
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 12px;
 }
