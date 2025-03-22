@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { Suspense } from "react";
 import ImageLoading from "./ImageLoading";
+import Logo from "../../../public/reshot-icon-movies-YHCSARN6B4.svg";
 
 const Card = ({
   id,
-  primaryImage,
   primaryTitle,
   type,
   startYear,
@@ -16,6 +16,7 @@ const Card = ({
   genres,
   averageRating,
   numVotes,
+  primaryImage,
 }: DataType) => {
   return (
     <Link href={`/${type}/${id}`}>
@@ -23,7 +24,7 @@ const Card = ({
         <div className="image h-[72%] overflow-hidden relative">
           <Suspense fallback={<ImageLoading />}>
             <Image
-              src={primaryImage}
+              src={primaryImage || Logo}
               alt="image"
               unoptimized={true}
               width={100}

@@ -23,7 +23,7 @@ export type DataType = {
   primaryTitle: string;
   type: string;
   description: string;
-  primaryImage: string;
+  primaryImage?: string;
   startYear: number;
   endYear: number | null;
   genres: string[];
