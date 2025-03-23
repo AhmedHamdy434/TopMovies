@@ -19,15 +19,39 @@ export default async function fetchData(url: string) {
 
 export type DataType = {
   id: string;
+  primaryTitle: string;
+  type: string;
+  primaryImage?: string;
+  startYear: number;
+  endYear: number | null;
+  genres: string[];
+  averageRating: number;
+  numVotes: number;
+};
+
+export type DataDetailType = {
+  id: string;
   url: string;
   primaryTitle: string;
   type: string;
   description: string;
   primaryImage?: string;
+  contentRating: string;
   startYear: number;
   endYear: number | null;
   genres: string[];
   runtimeMinutes: number;
   averageRating: number;
   numVotes: number;
+  directors: [{ id: string; url: string; fullName: string }];
+  writers: [{ id: string; url: string; fullName: string }];
+  cast: [
+    {
+      id: string;
+      url: string;
+      fullName: string;
+      job: string;
+      characters: string[];
+    }
+  ];
 };

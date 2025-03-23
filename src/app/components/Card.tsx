@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { Suspense } from "react";
 import ImageLoading from "./ImageLoading";
-import Logo from "../../../public/reshot-icon-movies-YHCSARN6B4.svg";
+import Sub from "../../../public/landing.png";
 
 const Card = ({
   id,
@@ -24,11 +24,12 @@ const Card = ({
         <div className="image h-[72%] overflow-hidden relative">
           <Suspense fallback={<ImageLoading />}>
             <Image
-              src={primaryImage || Logo}
+              src={primaryImage || Sub}
               alt="image"
               unoptimized={true}
-              width={100}
-              height={100}
+              width={900}
+              height={900}
+              priority={false}
               className="w-full rounded-t-[10px]"
             />
           </Suspense>
@@ -44,8 +45,8 @@ const Card = ({
             <FontAwesomeIcon icon={faStar} className="text-yellow-500 ml-2" />
           </div>
           <div className="genres absolute bottom-[5%] left-[5%] flex gap-3">
-            {genres.map((genre, index) => (
-              <span key={index} className="data">
+            {genres.map((genre) => (
+              <span key={genre} className="data">
                 {genre}
               </span>
             ))}

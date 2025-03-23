@@ -56,7 +56,6 @@ a {
 }
 .data {
   background-color: var(--color-main);
-  font-size: 12px;
   padding: 6px 12px;
   border-radius: 12px;
 }

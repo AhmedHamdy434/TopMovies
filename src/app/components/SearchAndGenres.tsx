@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import Card from "../components/Card";
 import { DataType } from "../fetch/fetchData";
+import ImageLoading from "./ImageLoading";
 
 const SearchAndGenres: React.FC<{
   allData: DataType[];
@@ -10,6 +11,7 @@ const SearchAndGenres: React.FC<{
   const [dataToShow, setDataToShow] = useState<DataType[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [search, setSearch] = useState<string>("");
+  const [noResultFound, setNoResultFound] = useState<boolean>(false);
   // const [page,setPage]=useState<number>(1);
   const handleCheckboxChange = (genre: string) => {
     setSelectedItems((prev) =>
@@ -18,33 +20,33 @@ const SearchAndGenres: React.FC<{
         : [...prev, genre]
     );
   };
-  const handleSearch = () => {
+  const handleSearch = useCallback(() => {
     setDataToShow(
       allData
         .filter(
           (data) =>
-            selectedItems.some((item) => data.genres.includes(item)) &&
+            selectedItems.every((item) => data.genres.includes(item)) &&
             data.primaryTitle.toLowerCase().includes(search.toLowerCase())
         )
         .slice(0, 9)
     );
-    setSearch("");
-  };
+  }, [search, allData, selectedItems]);
+  useEffect(() => {
+    handleSearch();
+    setNoResultFound(true);
+  }, [handleSearch]);
   return (
     <>
-      <div className="search pt-[50px] mb-[20px] flex flex-col justify-between items-center gap-4 sm:flex-row ">
+      <div className="search pt-[50px] mb-[30px] text-center">
         <input
           type="text"
-          className="w-full focus:outline-0 text-[26px] bg-main rounded-[6px] py-2 pl-4 sm:w-[80%]"
+          className="w-[80%] focus:outline-0 text-[26px] bg-main rounded-[6px] py-2 pl-4"
           placeholder="Search By Name"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button className="btn" onClick={handleSearch}>
-          Search
-        </button>
       </div>
-      <ul className="flex flex-wrap gap-x-6 gap-y-3">
+      <ul className="flex flex-wrap gap-x-3 gap-y-3">
         {allGenres.map((genre) => (
           <li key={genre} className="">
             <input
@@ -56,21 +58,25 @@ const SearchAndGenres: React.FC<{
             />
             <label
               htmlFor={genre}
-              className="data cursor-pointer !flex justify-center items-center !w-[100px] peer-checked:!bg-blue-500"
+              className="data cursor-pointer flex justify-center items-center text-[10px] w-[80px] sm:text-[12px] sm:w-[100px] peer-checked:!bg-blue-500"
             >
               {genre}
             </label>
           </li>
         ))}
       </ul>
-      {dataToShow.length === 0 ? (
-        <div className="text-[32px] my-[50px] text-center">No Result Found</div>
-      ) : (
-        <div className="card-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 py-[50px]">
-          {dataToShow.map((data) => (
-            <Card key={data.id} {...data} />
-          ))}
+      {dataToShow.length === 0 && noResultFound ? (
+        <div className="text-[32px] py-[100px] text-center font-extrabold h-[60vh]">
+          No Result Found
         </div>
+      ) : (
+        <Suspense fallback={<ImageLoading />}>
+          <div className="card-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 py-[50px] min-h-[60vh]">
+            {dataToShow.map((data) => (
+              <Card key={data.id} {...data} />
+            ))}
+          </div>
+        </Suspense>
       )}
     </>
   );
