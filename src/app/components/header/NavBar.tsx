@@ -7,14 +7,13 @@ import {
   faBars,
   faXmark,
   faChevronDown,
-  faMoon,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const NavBar = () => {
   const [bars, setBars] = useState<boolean>(false);
   const [top, setTop] = useState<boolean>(false);
-
   return (
     <>
       <div className="md:hidden">
@@ -49,10 +48,7 @@ const NavBar = () => {
           Home
         </Link>
         <div className="relative md:flex md:justify-center md:items-center">
-          <div
-            className="top  cursor-pointer pr-4"
-            onClick={() => setTop(!top)}
-          >
+          <div className="top cursor-pointer pr-4" onClick={() => setTop(!top)}>
             Top
             <FontAwesomeIcon
               icon={faChevronDown}
@@ -68,9 +64,9 @@ const NavBar = () => {
         >
           Favourites
         </Link>
-        <div className="profile flex justify-between px-[40px] mt-4 mb-8 md:justify-end md:px-0 md:my-0 ">
+        <div className="profile flex text-[16px] justify-between items-center px-[40px] mt-4 mb-8 md:justify-end md:px-0 md:my-0 md:gap-4">
           <Profile />
-          <FontAwesomeIcon icon={faMoon} size="xl" className="ml-4" />
+          <ThemeToggle />
         </div>
       </nav>
     </>

@@ -9,7 +9,7 @@ const TopList: React.FC<TopListProps> = ({ setTop, setBars }) => {
     setBars(false);
   };
   return (
-    <div className="bg-cyan-900 flex flex-col items-center gap-4 mt-4 py-4 md:absolute md:w-[200px] md:top-[100%] md:left-[-140%] md:pl-4 md:bg-main md:text-[16px] md:items-start">
+    <div className="flex flex-col items-center gap-4 mt-4 py-4 md:absolute md:w-[200px] md:top-[100%] md:left-[-140%] md:pl-4 md:bg-main md:text-[16px] md:items-start">
       <Link onClick={removingList} className="" href="/top250-movies">
         Top 250 Movies
       </Link>

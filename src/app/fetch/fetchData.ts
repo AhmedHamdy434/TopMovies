@@ -2,11 +2,13 @@ export default async function fetchData(url: string) {
   const API_KEY = process.env.API_KEY;
   const options: RequestInit = {
     method: "GET",
+    next: {
+      revalidate: 600,
+    },
     headers: {
       "x-rapidapi-key": API_KEY, // Now always a string
       "x-rapidapi-host": "imdb236.p.rapidapi.com",
     } as Record<string, string>, // Ensures headers are the correct type
-    cache: "force-cache",
   };
   if (!API_KEY) {
     console.error("API key is missing. Check your .env.local file.");

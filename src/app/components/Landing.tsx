@@ -2,7 +2,7 @@ import Image from "next/image";
 import LandingImage from "../../../public/landing2.png";
 const Landing = () => {
   return (
-    <main className="bg-[#333] py-[100px]">
+    <main className="py-[100px]">
       <div className="container flex justify-between items-center xl:gap-[100px] 2xl:gap-[300px]">
         <div className="landing-text">
           <h2 className="text-[44px] font-bold text-main mb-[48px]">
@@ -17,6 +17,7 @@ const Landing = () => {
         <Image
           src={LandingImage}
           alt="Landing-Image"
+          priority={true}
           className="hidden md:block w-[400px] xl:w-[550px]"
         ></Image>
       </div>

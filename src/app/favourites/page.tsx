@@ -1,5 +1,5 @@
 const favouritePage = () => {
-  return <div>favouritePage</div>;
+  return <div className="min-h-[100vh]">favouritePage</div>;
 };
 
 export default favouritePage;
