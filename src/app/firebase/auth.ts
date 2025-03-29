@@ -1,5 +1,6 @@
-// auth.ts
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { auth, googleProvider } from "./config";
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
