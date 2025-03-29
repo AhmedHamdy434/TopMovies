@@ -23,6 +23,17 @@
   --color-main: var(--main);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --animate-list: uplist 0.3s;
+  @keyframes uplist {
+    from {
+      transform: translateY(-100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 }
 */ body {
   font-family: Arial, Helvetica, sans-serif;

@@ -9,13 +9,13 @@ const ThemeToggle = () => {
   useEffect(() => {
     setMounted(true);
   }, []);
-  if (!mounted) return <div className="w-[24px] h-[32px]"></div>;
+  if (!mounted) return <div className="w-[24px] h-[32px] ml-4"></div>;
   return (
     <FontAwesomeIcon
       icon={faMoon}
       className={`${
         resolvedTheme === "dark"
-      }? text-black:text-white cursor-pointer`}
+      }? text-black:text-white cursor-pointer ml-4`}
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       size="2xl"
     />

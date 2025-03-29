@@ -8,6 +8,7 @@ import Header from "./components/header/Header";
 import Footer from "./components/Footer";
 // import ReduxProvider from "../../Providers/ReduxProvider";
 import CustomThemeProvider from "../../Providers/ThemeProvider";
+import { AuthProvider } from "../../Providers/AuthProvider";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -36,11 +37,13 @@ export default function RootLayout({
         className="bg-background-light text-foreground-light dark:bg-background-dark dark:text-foreground-dark"
       >
         <CustomThemeProvider>
-          {/* <ReduxProvider> */}
-          <Header />
-          {children}
-          <Footer />
-          {/* </ReduxProvider> */}
+          <AuthProvider>
+            {/* <ReduxProvider> */}
+            <Header />
+            {children}
+            <Footer />
+            {/* </ReduxProvider> */}
+          </AuthProvider>
         </CustomThemeProvider>
       </body>
     </html>
