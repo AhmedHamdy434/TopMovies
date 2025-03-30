@@ -65,7 +65,7 @@ const NavBar = () => {
           Favourites
         </Link>
         <div className="profile flex text-[16px] justify-between items-center px-[40px] mt-4 mb-8 md:justify-end md:px-0 md:my-0 md:gap-4">
-          <Profile />
+          <Profile setBars={setBars} />
           <ThemeToggle />
         </div>
       </nav>

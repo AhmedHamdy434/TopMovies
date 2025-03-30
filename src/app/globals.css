@@ -3,20 +3,17 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
+  --background: #eee;
   --foreground: #171717;
   --main: #a8dadc;
 }
 
-/* @media (prefers-color-scheme: dark) { */
-/* :root { */
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
   --main: #024950;
 }
-/* } */
-/* } */
+
 @theme {
   --color-background: var(--color-background);
   --color-foreground: var(--color-foreground);
@@ -62,4 +59,11 @@ a {
   padding: 6px 12px;
   border-radius: 12px;
   user-select: none;
+}
+button {
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    opacity: 0.8;
+  }
 }

@@ -2,19 +2,17 @@ import { DataDetailType } from "@/app/fetch/fetchData";
 import Image from "next/image";
 import Sub from "../../../../public/landing2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeart,
-  faStar,
-  faUpRightFromSquare,
-} from "@fortawesome/free-solid-svg-icons";
+import { faStar, faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import FavouriteIcon from "@/app/components/FavouriteIcon";
 
 const MovieDetail = ({
+  id,
   url,
   primaryTitle,
   type,
   description,
-  // primaryImage,
+  primaryImage,
   contentRating,
   startYear,
   endYear,
@@ -38,11 +36,7 @@ const MovieDetail = ({
                 {endYear && `- ${endYear}`}&#93;
               </span>
             </div>
-            <FontAwesomeIcon
-              icon={faHeart}
-              size="2xl"
-              className="text-red-400"
-            />
+            <FavouriteIcon id={id} />
           </div>
           <div className="type flex gap-4 mb-4 text-[12px] md:text-[16px]">
             <span className="rounded-[50%] bg-main inline-flex justify-center items-center  w-[50px] h-[50px] md:w-[70px] md:h-[70px]">
@@ -75,7 +69,7 @@ const MovieDetail = ({
         </div>
         <div className="image-section w-full flex flex-col gap-4 md:w-[40%]">
           <Image
-            src={Sub}
+            src={primaryImage || Sub}
             alt="image"
             unoptimized={true}
             width={900}

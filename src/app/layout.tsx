@@ -6,7 +6,6 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 import Header from "./components/header/Header";
 import Footer from "./components/Footer";
-// import ReduxProvider from "../../Providers/ReduxProvider";
 import CustomThemeProvider from "../../Providers/ThemeProvider";
 import { AuthProvider } from "../../Providers/AuthProvider";
 
@@ -38,11 +37,9 @@ export default function RootLayout({
       >
         <CustomThemeProvider>
           <AuthProvider>
-            {/* <ReduxProvider> */}
             <Header />
             {children}
             <Footer />
-            {/* </ReduxProvider> */}
           </AuthProvider>
         </CustomThemeProvider>
       </body>
