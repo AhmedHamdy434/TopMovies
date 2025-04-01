@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { gettingDetaileById } from "../favourites/FavouriteActions";
-import { DataDetailType } from "../fetch/fetchData";
+import { gettingDetaileById } from "@/lib/FavouriteActions";
+import { DataDetailType } from "@/lib/fetchData";
 import Card from "./Card";
 
 const CardHandle = ({ dataId }: { dataId: string }) => {

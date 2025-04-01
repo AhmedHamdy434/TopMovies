@@ -1,5 +1,5 @@
-import SearchAndGenres from "../components/SearchAndGenres";
-import fetchData, { DataType } from "../fetch/fetchData";
+import SearchAndGenres from "@/components/SearchAndGenres";
+import fetchData, { DataType } from "../../lib/fetchData";
 
 const topMoviesPage = async () => {
   const allData: DataType[] = await fetchData(

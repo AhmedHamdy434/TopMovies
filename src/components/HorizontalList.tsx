@@ -1,5 +1,5 @@
 import Link from "next/link";
-import fetchData, { DataType } from "../fetch/fetchData";
+import fetchData, { DataType } from "../lib/fetchData";
 import Card from "./Card";
 
 const HorizontalList = async ({ url }: { url: string }) => {

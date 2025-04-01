@@ -1,26 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
-import { DataType } from "../fetch/fetchData";
+import { DataType } from "../lib/fetchData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import Sub from "../../../public/landing.png";
+import Sub from "../../public/landing.png";
 import FavouriteIcon from "./FavouriteIcon";
 
-const Card = ({
-  id,
-  primaryTitle,
-  type,
-  startYear,
-  endYear,
-  genres,
-  averageRating,
-  numVotes,
-  primaryImage,
-}: DataType) => {
+const Card = (params: DataType) => {
+  const {
+    id,
+    primaryTitle,
+    type,
+    startYear,
+    endYear,
+    genres,
+    averageRating,
+    numVotes,
+    primaryImage,
+  } = params;
   return (
     <div className="flex">
       <div className="card relative hover:-translate-y-4 transition-all duration-300 cursor-pointer rounded-[10px] bg-[#222] dark:bg-[#eee]">
-        <div className="image max-h-[82%] sm:max-h-[76%] min-w-full overflow-hidden relative">
+        <div className="image max-h-[80%] sm:max-h-[74%] min-w-full overflow-hidden relative">
           <Image
             src={primaryImage || Sub}
             alt="image"
@@ -30,7 +31,7 @@ const Card = ({
             className="w-full rounded-t-[10px]"
           />
           <div className="absolute top-[5%] left-[5%]">
-            <FavouriteIcon id={id} />
+            <FavouriteIcon id={id} movieData={params} />
           </div>
           <div className="rating absolute top-[5%] right-[5%] flex items-center">
             <span className="text-[24px] font-bold text-main">
@@ -46,7 +47,7 @@ const Card = ({
             ))}
           </div>
         </div>
-        <div className="information min-h-[18%] p-4">
+        <div className="information min-h-[20%] p-4">
           <Link href={`/${type}/${id}`} className="!block">
             <h3 className="text-[20px] md:text-[24px] text-main font-bold leading-[1.2] mb-2">
               {primaryTitle}

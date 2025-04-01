@@ -1,10 +1,10 @@
-import { DataDetailType } from "@/app/fetch/fetchData";
+import { DataDetailType } from "@/lib/fetchData";
 import Image from "next/image";
-import Sub from "../../../../public/landing2.png";
+import Sub from "../../../public/landing2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import FavouriteIcon from "@/app/components/FavouriteIcon";
+import FavouriteIcon from "@/components/FavouriteIcon";
 
 const MovieDetail = ({
   id,
@@ -23,7 +23,7 @@ const MovieDetail = ({
   cast,
 }: DataDetailType) => {
   return (
-    <div className="container">
+    <div className="container min-h-screen">
       <div className="main-section flex flex-col md:flex-row-reverse justify-between gap-[50px] pt-[50px]">
         <div className="details-section w-full md:w-[55%]">
           <div className="title flex justify-between items-center mb-4">
@@ -39,13 +39,15 @@ const MovieDetail = ({
             <FavouriteIcon id={id} />
           </div>
           <div className="type flex gap-4 mb-4 text-[12px] md:text-[16px]">
-            <span className="rounded-[50%] bg-main inline-flex justify-center items-center  w-[50px] h-[50px] md:w-[70px] md:h-[70px]">
+            <span className="rounded-[50%] bg-main inline-flex justify-center items-center  w-[70px] h-[70px] md:w-[80px] md:h-[80px]">
               {type}
             </span>
-            <span className="rounded-[50%] bg-main inline-flex justify-center items-center w-[50px] h-[50px] md:w-[70px] md:h-[70px]">
-              {runtimeMinutes} Min
-            </span>
-            <span className="rounded-[50%] bg-main inline-flex justify-center items-center w-[50px] h-[50px] md:w-[70px] md:h-[70px]">
+            {runtimeMinutes && (
+              <span className="rounded-[50%] bg-main inline-flex justify-center items-center w-[70px] h-[70px] md:w-[80px] md:h-[80px]">
+                {runtimeMinutes} Min
+              </span>
+            )}
+            <span className="rounded-[50%] bg-main inline-flex justify-center items-center w-[70px] h-[70px] md:w-[80px] md:h-[80px]">
               {contentRating}
             </span>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 import { Suspense, useCallback, useEffect, useState } from "react";
 import Card from "../components/Card";
-import { DataType } from "../fetch/fetchData";
+import { DataType } from "../lib/fetchData";
 import ImageLoading from "./ImageLoading";
 
 const SearchAndGenres: React.FC<{
@@ -40,15 +40,15 @@ const SearchAndGenres: React.FC<{
       <div className="search pt-[50px] mb-[30px] text-center">
         <input
           type="text"
-          className="w-[80%] focus:outline-0 text-[26px] bg-main rounded-[6px] py-2 pl-4"
+          className="w-full focus:outline-0 text-[26px] bg-main rounded-[6px] py-2 pl-4"
           placeholder="Search By Name"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <ul className="flex flex-wrap gap-x-3 gap-y-3">
+      <ul className="grid grid-cols-[repeat(auto-fill,80px)] sm:grid-cols-[repeat(auto-fill,100px)] gap-x-3 gap-y-3 justify-between ">
         {allGenres.map((genre) => (
-          <li key={genre} className="">
+          <li key={genre} className="w-fit">
             <input
               type="checkbox"
               name={genre}

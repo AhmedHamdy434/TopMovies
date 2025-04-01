@@ -4,10 +4,11 @@ import "./globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
-import Header from "./components/header/Header";
-import Footer from "./components/Footer";
-import CustomThemeProvider from "../../Providers/ThemeProvider";
-import { AuthProvider } from "../../Providers/AuthProvider";
+import Header from "@/components/header/Header";
+import Footer from "@/components/Footer";
+import CustomThemeProvider from "../Providers/ThemeProvider";
+import { AuthProvider } from "../Providers/AuthProvider";
+// import { ReduxProvider } from "@/Providers/ReduxProvider";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -37,9 +38,11 @@ export default function RootLayout({
       >
         <CustomThemeProvider>
           <AuthProvider>
+            {/* <ReduxProvider> */}
             <Header />
             {children}
             <Footer />
+            {/* </ReduxProvider> */}
           </AuthProvider>
         </CustomThemeProvider>
       </body>

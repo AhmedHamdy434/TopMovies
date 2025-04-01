@@ -1,4 +1,4 @@
-import fetchData, { DataDetailType } from "@/app/fetch/fetchData";
+import fetchData, { DataDetailType } from "@/lib/fetchData";
 import MovieDetail from "./FullMovieDetail";
 
 const MoviePage = async ({

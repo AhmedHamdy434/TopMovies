@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { signUp, signIn, signInWithGoogle } from "@/app/firebase/auth";
+import { signUp, signIn, signInWithGoogle } from "@/firebase/auth";
 import { useRouter } from "next/navigation";
 
 export default function Sign({ type }: { type: boolean }) {
@@ -30,7 +30,7 @@ export default function Sign({ type }: { type: boolean }) {
   };
 
   return (
-    <div className="container flex flex-col items-center justify-center h-screen">
+    <div className="container flex flex-col items-center justify-center min-h-screen">
       <div className="bg-[#ddd] dark:bg-[#222] p-8 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-4">
           {type ? "Sign In" : "Sign Up"}

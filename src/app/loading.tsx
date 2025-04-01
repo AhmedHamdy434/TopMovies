@@ -1,4 +1,4 @@
-import ImageLoading from "./components/ImageLoading";
+import ImageLoading from "@/components/ImageLoading";
 
 const loading = () => {
   return (

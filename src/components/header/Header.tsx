@@ -1,7 +1,7 @@
 import NavBar from "./NavBar";
 import Image from "next/image";
 
-import Logo from "../../../../public/reshot-icon-movies-YHCSARN6B4.svg";
+import Logo from "../../../public/reshot-icon-movies-YHCSARN6B4.svg";
 import Link from "next/link";
 const Header = () => {
   return (

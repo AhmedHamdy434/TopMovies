@@ -1,5 +1,5 @@
-import HorizontalScroll from "./components/HorizontalList";
-import Landing from "./components/Landing";
+import HorizontalScroll from "@/components/HorizontalList";
+import Landing from "@/components/Landing";
 
 export default function Home() {
   const topMoviesUrl = "https://imdb236.p.rapidapi.com/imdb/top250-movies";

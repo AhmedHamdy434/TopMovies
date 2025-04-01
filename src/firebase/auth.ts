@@ -56,7 +56,6 @@ export const signUp = async (
       firstName: firstName || "",
       lastName: lastName || "",
       phoneNumber: phoneNumber || "",
-      favouriteList: [],
     });
     return { success: true };
   } catch (error: any) {

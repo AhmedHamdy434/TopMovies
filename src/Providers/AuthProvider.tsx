@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth, db } from "@/app/firebase/config";
+import { auth, db } from "@/firebase/config";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { getDoc, doc } from "firebase/firestore";
 interface ExtraInfoType {
@@ -9,7 +9,6 @@ interface ExtraInfoType {
   firstName?: string;
   lastName?: string;
   phoneNumber?: string;
-  favouriteList?: string[];
 }
 interface AuthContextType {
   user: User | null;
@@ -35,7 +34,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
               firstName?: string;
               lastName?: string;
               phoneNumber?: string;
-              favouriteList?: string[];
             }
           );
           setUser(currentUser);

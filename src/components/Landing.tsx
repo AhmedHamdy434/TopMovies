@@ -1,5 +1,5 @@
 import Image from "next/image";
-import LandingImage from "../../../public/landing2.png";
+import LandingImage from "../../public/landing2.png";
 const Landing = () => {
   return (
     <main className="py-[100px]">
