@@ -1,6 +1,6 @@
-import { DataDetailType } from "@/lib/fetchData";
+import { DataDetailType, DataType } from "@/lib/fetchData";
 import Image from "next/image";
-import Sub from "../../../public/landing2.png";
+import Sub from "../../../../public/landing2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -22,6 +22,17 @@ const MovieDetail = ({
   numVotes,
   cast,
 }: DataDetailType) => {
+  const movieDetail: DataType = {
+    id,
+    primaryTitle,
+    type,
+    startYear,
+    endYear,
+    genres,
+    averageRating,
+    numVotes,
+    primaryImage,
+  };
   return (
     <div className="container min-h-screen">
       <div className="main-section flex flex-col md:flex-row-reverse justify-between gap-[50px] pt-[50px]">
@@ -36,7 +47,7 @@ const MovieDetail = ({
                 {endYear && `- ${endYear}`}&#93;
               </span>
             </div>
-            <FavouriteIcon id={id} />
+            <FavouriteIcon id={id} movieData={movieDetail} />
           </div>
           <div className="type flex gap-4 mb-4 text-[12px] md:text-[16px]">
             <span className="rounded-[50%] bg-main inline-flex justify-center items-center  w-[70px] h-[70px] md:w-[80px] md:h-[80px]">
