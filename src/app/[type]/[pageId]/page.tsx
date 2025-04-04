@@ -1,5 +1,5 @@
-import fetchData, { DataDetailType } from "@/lib/fetchData";
-import MovieDetail from "./FullMovieDetail";
+import fetchData, { baseUrl, DataDetailType } from "@/lib/fetchData";
+import FullMovieDetail from "./FullMovieDetail";
 
 const MoviePage = async ({
   params,
@@ -7,14 +7,10 @@ const MoviePage = async ({
   params: Promise<{ pageId: string }>;
 }) => {
   const { pageId } = await params;
-  const movieData: DataDetailType = await fetchData(
-    `https://imdb236.p.rapidapi.com/imdb/${pageId}`
-  );
-  console.log(movieData);
-
+  const movieData: DataDetailType = await fetchData(`${baseUrl}/${pageId}`);
   return (
     <>
-      <MovieDetail {...movieData} />
+      <FullMovieDetail {...movieData} />
     </>
   );
 };

@@ -18,6 +18,12 @@ export default async function fetchData(url: string) {
   const result = await response.json();
   return result;
 }
+export const baseUrl = "https://imdb236.p.rapidapi.com/imdb";
+export const genresUrl = `${baseUrl}/genres`;
+export const popularMoviesUrl = `${baseUrl}/most-popular-movies`;
+export const popularTvUrl = `${baseUrl}/most-popular-tv`;
+export const topMoviesUrl = `${baseUrl}/top250-movies`;
+export const topTvUrl = `${baseUrl}/top250-tv`;
 
 export type DataType = {
   id: string;

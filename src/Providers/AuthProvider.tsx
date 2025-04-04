@@ -1,51 +1,37 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth, db } from "@/firebase/config";
+import { auth } from "@/firebase/config";
 import { onAuthStateChanged, User } from "firebase/auth";
-import { getDoc, doc } from "firebase/firestore";
-interface ExtraInfoType {
-  userName: string;
-  firstName?: string;
-  lastName?: string;
-  phoneNumber?: string;
-}
+import { DataType } from "@/lib/fetchData";
+import { gettingFav } from "@/lib/FavouriteActions";
+
 interface AuthContextType {
   user: User | null;
-  userExtraInfo: ExtraInfoType | null;
+  favouriteList: DataType[] | null;
 }
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [userExtraInfo, setuserExtraInfo] = useState<ExtraInfoType>({
-    userName: "",
-  });
+  const [favouriteList, setFavouriteList] = useState<DataType[]>([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        const userSnap = await getDoc(doc(db, "users", currentUser.uid));
-
-        if (userSnap.exists()) {
-          setuserExtraInfo(
-            userSnap.data() as {
-              userName: string;
-              firstName?: string;
-              lastName?: string;
-              phoneNumber?: string;
-            }
-          );
-          setUser(currentUser);
-        }
+        const allFavouriteList = await gettingFav(currentUser.uid);
+        setUser(currentUser);
+        setFavouriteList(allFavouriteList);
+      } else {
+        setUser(null);
+        setFavouriteList([]);
       }
     });
-
     return () => unsubscribe();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, userExtraInfo }}>
+    <AuthContext.Provider value={{ user, favouriteList }}>
       {children}
     </AuthContext.Provider>
   );

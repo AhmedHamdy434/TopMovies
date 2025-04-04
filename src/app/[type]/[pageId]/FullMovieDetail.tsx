@@ -6,7 +6,7 @@ import { faStar, faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import FavouriteIcon from "@/components/FavouriteIcon";
 
-const MovieDetail = ({
+const FullMovieDetail = ({
   id,
   url,
   primaryTitle,
@@ -133,4 +133,4 @@ const MovieDetail = ({
   );
 };
 
-export default MovieDetail;
+export default FullMovieDetail;

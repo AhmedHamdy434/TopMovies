@@ -1,8 +1,8 @@
 "use client";
 import { Suspense, useCallback, useEffect, useState } from "react";
-import Card from "../components/Card";
-import { DataType } from "../lib/fetchData";
-import ImageLoading from "./ImageLoading";
+import Card from "@/components/Card";
+import { DataType } from "@/lib/fetchData";
+import ImageLoading from "@/components/ImageLoading";
 
 const SearchAndGenres: React.FC<{
   allData: DataType[];
@@ -12,7 +12,6 @@ const SearchAndGenres: React.FC<{
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [search, setSearch] = useState<string>("");
   const [noResultFound, setNoResultFound] = useState<boolean>(false);
-  // const [page,setPage]=useState<number>(1);
   const handleCheckboxChange = (genre: string) => {
     setSelectedItems((prev) =>
       prev.includes(genre)

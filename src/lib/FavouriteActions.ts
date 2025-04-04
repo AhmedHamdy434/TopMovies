@@ -1,10 +1,10 @@
 import {
   doc,
-  getDoc,
-  setDoc,
   deleteDoc,
-  collection,
   getDocs,
+  collection,
+  setDoc,
+  getDoc,
 } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { DataType } from "./fetchData";
@@ -14,20 +14,18 @@ export async function addingFav(
   id: string,
   movieDetail: DataType
 ) {
-  await setDoc(doc(db, "users", userId, "favouriteList", id), movieDetail);
+  const favouriteList = doc(db, userId, id);
+  await setDoc(favouriteList, movieDetail);
 }
 export async function removingFav(userId: string, id: string) {
-  await deleteDoc(doc(db, "users", userId, "favouriteList", id));
+  await deleteDoc(doc(db, userId, id));
 }
-export async function gettingFav(userId: string) {
-  const favCollection = collection(db, "users", userId, "favouriteList");
-  const snapshot = await getDocs(favCollection);
-  return snapshot.docs.map((doc) => ({ ...doc.data() }));
-  // const allFavList = await getDoc(doc(db, "users", userId, "favouriteList"));
-  // return allFavList.exists() ? allFavList.data() : null;
+export async function gettingFav(userId: string): Promise<DataType[]> {
+  const favCollection = await getDocs(collection(db, userId));
+  return favCollection.docs.map((doc) => ({ ...doc.data() })) as DataType[];
 }
 export async function gettingDetaileById(userId: string, id: string) {
-  const movieData = await getDoc(doc(db, "users", userId, "favouriteList", id));
+  const movieData = await getDoc(doc(db, userId, id));
 
   return movieData.exists() ? movieData.data() : null;
 }

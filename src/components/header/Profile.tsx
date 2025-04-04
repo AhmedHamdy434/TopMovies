@@ -1,22 +1,23 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/Providers/AuthProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import LogoutButton from "../LogOutButton";
+import { useEffect, useState } from "react";
+import LogoutButton from "./LogOutButton";
+import SignInButton from "./SignInButton";
 type ProfileProps = {
   setBars: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const Profile: React.FC<ProfileProps> = ({ setBars }) => {
   const authContext = useAuth();
   const user = authContext?.user;
-  const userExtraInfo = authContext?.userExtraInfo;
-
-  const router = useRouter();
-  console.log(user);
-
   const [profileList, setProfileList] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
+  if (isLoading) return;
+
   return (
     <div className="flex gap-4 items-center relative">
       {user ? (
@@ -27,15 +28,7 @@ const Profile: React.FC<ProfileProps> = ({ setBars }) => {
           onClick={() => setProfileList(!profileList)}
         />
       ) : (
-        <button
-          className="px-[14px] py-[6px] rounded-[5px] cursor-pointer bg-[var(--background)]"
-          onClick={() => {
-            router.push("/signin");
-            setBars(false);
-          }}
-        >
-          Sign In
-        </button>
+        <SignInButton setBars={setBars} />
       )}
       {user && (
         <ul
@@ -45,11 +38,9 @@ const Profile: React.FC<ProfileProps> = ({ setBars }) => {
           profileList ? "md:flex" : "md:hidden"
         }`}
         >
-          <li className="w-[80px] md:w-[140px] truncate">
-            {userExtraInfo?.userName}
-          </li>
+          <li className="w-[80px] md:w-[140px] truncate">{user.displayName}</li>
           <li>
-            <LogoutButton setBars={setBars} />
+            <LogoutButton setProfileList={setProfileList} setBars={setBars} />
           </li>
         </ul>
       )}

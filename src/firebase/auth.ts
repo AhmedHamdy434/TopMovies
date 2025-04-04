@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { auth, googleProvider, db } from "./config";
-import { validatePassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { auth, googleProvider, facebookProvider } from "./config";
+import { updateProfile, validatePassword } from "firebase/auth";
 
 import {
   createUserWithEmailAndPassword,
@@ -15,51 +14,45 @@ interface AuthResponse {
   message?: string;
 }
 
+// Password Validation
+const passwordValidation = async (password: string) => {
+  let passwordErrorMessage = "";
+  const status = await validatePassword(auth, password); //check valid password
+  if (!status.isValid) {
+    if (!status.containsLowercaseLetter)
+      passwordErrorMessage = "Needs at least one lowerCase character";
+    else if (!status.containsNumericCharacter)
+      passwordErrorMessage =
+        "Password is too short , it should be 8 character or more";
+    else if (!status.containsUppercaseLetter)
+      passwordErrorMessage = "Needs at least one upperCase character";
+    else if (!status.meetsMinPasswordLength)
+      passwordErrorMessage = "Needs at least one number character";
+    return passwordErrorMessage;
+  }
+};
+
 // Sign Up with Email & Password
 export const signUp = async (
   email: string,
   password: string,
-  userName: string,
-  firstName: string,
-  lastName?: string,
-  phoneNumber?: string
+  userName: string
 ): Promise<AuthResponse> => {
   try {
-    const status = await validatePassword(auth, password); //check valid password
-    if (!status.isValid) {
-      let passwordErrorMessage = "";
-      const needsLowerCase = status.containsLowercaseLetter !== true;
-      const needsUpperCase = status.containsUppercaseLetter !== true;
-      const needsNumber = status.containsNumericCharacter !== true;
-      const shortPassword = status.meetsMinPasswordLength !== true;
-      if (needsLowerCase)
-        passwordErrorMessage = "Needs at least one lowerCase character";
-      else if (shortPassword)
-        passwordErrorMessage =
-          "Password is too short , it should be 8 character or more";
-      else if (needsUpperCase)
-        passwordErrorMessage = "Needs at least one upperCase character";
-      else if (needsNumber)
-        passwordErrorMessage = "Needs at least one number character";
-      return { success: false, message: passwordErrorMessage };
-    }
-
+    const passUnValid = await passwordValidation(password);
+    if (passUnValid) return { success: false, message: passUnValid };
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
     const user = userCredential.user;
-    await setDoc(doc(db, "users", user.uid), {
-      uid: user.uid,
-      userName: userName,
-      firstName: firstName || "",
-      lastName: lastName || "",
-      phoneNumber: phoneNumber || "",
+    await updateProfile(user, {
+      displayName: userName,
     });
     return { success: true };
-  } catch (error: any) {
-    return { success: false, message: error.message };
+  } catch {
+    return { success: false, message: "There is an Error in Sign Up" };
   }
 };
 
@@ -71,8 +64,8 @@ export const signIn = async (
   try {
     await signInWithEmailAndPassword(auth, email, password);
     return { success: true };
-  } catch (error: any) {
-    return { success: false, message: error.message };
+  } catch {
+    return { success: false, message: "There is an Error in Sign In" };
   }
 };
 
@@ -84,8 +77,26 @@ export const signInWithGoogle = async (): Promise<AuthResponse> => {
     }
     await signInWithPopup(auth, googleProvider);
     return { success: true };
-  } catch (error: any) {
-    return { success: false, message: error.message };
+  } catch {
+    return {
+      success: false,
+      message: "There is an Error in Sign In using google",
+    };
+  }
+};
+// Sign In with Facebook
+export const signInWithFaceBook = async (): Promise<AuthResponse> => {
+  try {
+    if (typeof window === "undefined") {
+      throw new Error("signInWithPopup can only be used in the browser.");
+    }
+    await signInWithPopup(auth, facebookProvider);
+    return { success: true };
+  } catch {
+    return {
+      success: false,
+      message: "There is an Error in Sign In using facebook",
+    };
   }
 };
 

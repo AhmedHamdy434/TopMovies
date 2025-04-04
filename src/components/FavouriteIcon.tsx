@@ -14,7 +14,6 @@ const FavouriteIcon = ({
 }) => {
   const authContext = useAuth();
   const userId = authContext?.user?.uid;
-
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
 
   const handleFavorite = async () => {
@@ -30,15 +29,11 @@ const FavouriteIcon = ({
   useEffect(() => {
     const isFavouriteFunction = async () => {
       if (!userId) return;
-      const favouriteListId = await gettingFav(userId);
-
-      if (favouriteListId)
-        setIsFavourite(
-          Object.keys(favouriteListId).some((favId) => favId === id)
-        );
+      const favouriteList = await gettingFav(userId);
+      setIsFavourite(favouriteList?.some((data) => data.id === id) || false);
     };
     isFavouriteFunction();
-  }, [id, userId]);
+  }, [userId, isFavourite, id]);
   return (
     <>
       <FontAwesomeIcon
